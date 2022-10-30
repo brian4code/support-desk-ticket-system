@@ -15,15 +15,16 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-// Routes
+// Serve Backend Routes
 app.use('/api/users', require('./routes/userRoutes'))
 app.use('/api/tickets', require('./routes/ticketRoutes'))
 
-// Server Frontend 
+// Serve Frontend 
 if (process.env.NODE_ENV === 'production') {
   // Set build folder as static
   app.use(express.static(path.join(__dirname, '../frontend/build')))
 
+  // Serve Frontend index.html file
   app.get('*', (req, res) => 
     res.sendFile(path.join(__dirname, '../frontend/build/index.html'))
   )
