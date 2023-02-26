@@ -2,16 +2,15 @@ import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {toast} from 'react-toastify'
 import {FaUser} from 'react-icons/fa'
-// bring in some hooks
 import {useSelector, useDispatch} from 'react-redux'
-import {register, reset} from '../features/auth/authSlice'
+import { register, reset } from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
 
-function Register() {
+function Register_dum() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password: '',
+    password: '', 
     password2: '',
   })
 
@@ -20,18 +19,17 @@ function Register() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  // retrieve data from global state by the "useSelector" hook
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
+  const {user, isLoading, isError, isSuccess, message} = useSelector(
     (state) => state.auth
   )
 
   useEffect(() => {
-    if (isError) {
+    if(isError) {
       toast.error(message)
     }
 
-    // Redirect when signed up 
-    if (isSuccess || user) {
+    // Redirect when logged in 
+    if(isSuccess || user) {
       navigate('/')
     }
 
@@ -48,26 +46,26 @@ function Register() {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    if (password !== password2 ) {
+    if(password !== password2) {
       toast.error('Password do not match')
     } else {
       const userData = {
-        name,
+        name, 
         email,
-        password
+        password,
       }
 
       dispatch(register(userData))
     }
   }
 
-  if (isLoading) {
+  if(isLoading) {
     return <Spinner />
   }
 
   return (
     <>
-      <section className="heading">
+      <section className='heading'>
         <h1>
           <FaUser /> Register
         </h1>
@@ -77,8 +75,8 @@ function Register() {
       <section className="form">
         <form onSubmit={onSubmit}>
           <div className="form-group">
-            <input
-              type='text'
+            <input 
+              type="text" 
               className='form-control'
               id='name'
               name='name'
@@ -89,8 +87,8 @@ function Register() {
             />
           </div>
           <div className="form-group">
-            <input
-              type='email'
+            <input 
+              type="email" 
               className='form-control'
               id='email'
               name='email'
@@ -101,20 +99,20 @@ function Register() {
             />
           </div>
           <div className="form-group">
-            <input
-              type='password'
+            <input 
+              type="password" 
               className='form-control'
               id='password'
               name='password'
               value={password}
               onChange={onChange}
-              placeholder='Enter password'
+              placeholder='Enter your password'
               required
             />
           </div>
           <div className="form-group">
-            <input
-              type='password'
+            <input 
+              type="password" 
               className='form-control'
               id='password2'
               name='password2'
@@ -133,4 +131,4 @@ function Register() {
   )
 }
 
-export default Register
+export default Register_dum

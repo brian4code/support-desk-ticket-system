@@ -3,22 +3,21 @@ import {toast} from 'react-toastify'
 import {useNavigate} from 'react-router-dom'
 import {FaSignInAlt} from 'react-icons/fa'
 import {useSelector, useDispatch} from 'react-redux'
-import {login, reset} from '../features/auth/authSlice'
+import { login, reset } from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
 
 function Login() {
   const [formData, setFormData] = useState({
     email: '',
-    password: '',
+    password: '', 
   })
 
   const {email, password} = formData
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  // retrieve data from global state by the "useSelector" hook
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
+  
+  const {user, isLoading, isError, isSuccess, message} = useSelector(
     (state) => state.auth
   )
 
@@ -27,12 +26,11 @@ function Login() {
       toast.error(message)
     }
 
-    // Redirect when logged in 
     if (isSuccess || user) {
       navigate('/')
     }
 
-    dispatch(reset())    
+    dispatch(reset())
   }, [isError, isSuccess, user, message, navigate, dispatch])
 
   const onChange = (e) => {
@@ -59,7 +57,7 @@ function Login() {
 
   return (
     <>
-      <section className="heading">
+      <section className='heading'>
         <h1>
           <FaSignInAlt /> Login
         </h1>
@@ -69,8 +67,8 @@ function Login() {
       <section className="form">
         <form onSubmit={onSubmit}>
           <div className="form-group">
-            <input
-              type='email'
+            <input 
+              type="email" 
               className='form-control'
               id='email'
               name='email'
@@ -81,17 +79,18 @@ function Login() {
             />
           </div>
           <div className="form-group">
-            <input
-              type='password'
+            <input 
+              type="password" 
               className='form-control'
               id='password'
               name='password'
               value={password}
               onChange={onChange}
-              placeholder='Enter password'
+              placeholder='Enter your password'
               required
             />
           </div>
+        
           <div className="form-group">
             <button className="btn btn-block">Submit</button>
           </div>

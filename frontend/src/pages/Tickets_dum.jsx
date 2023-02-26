@@ -1,22 +1,18 @@
 import {useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {getTickets, reset} from '../features/tickets/ticketSlice'
+import { getTickets, reset } from '../features/tickets/ticketSlice'
 import Spinner from '../components/Spinner'
 import BackButton from '../components/BackButton'
-import TicketItem from '../components/TicketItem'
+import TicketItem_dum from '../components/TicketItem_dum'
 
-// Tickets page to list out all tickets 
-
-function Tickets() {
-  const {tickets, isLoading, isSuccess} = useSelector(
-    (state) => state.tickets
-  )
-
+function Tickets_dum() {
+  const {tickets, isLoading, isSuccess} = useSelector((state) => state.tickets)
+  
   const dispatch = useDispatch()
 
   useEffect(() => {
     return () => {
-      if(isSuccess) {
+      if (isSuccess) {
         dispatch(reset())
       }
     }
@@ -29,7 +25,7 @@ function Tickets() {
   if (isLoading) {
     return <Spinner />
   }
-
+  
   return (
     <>
       <BackButton url='/' />
@@ -41,13 +37,12 @@ function Tickets() {
           <div>Status</div>
           <div></div>
         </div>
-        {/* embed a component to display each ticket info */}
         {tickets.map((ticket) => {
-          return <TicketItem key={ticket._id} ticket={ticket} />
+          <TicketItem_dum key={ticket._id} ticket={ticket} /> 
         })}
       </div>
     </>
   )
 }
 
-export default Tickets
+export default Tickets_dum
